@@ -1,0 +1,25 @@
+<h2 mat-dialog-title>Hijos</h2>
+<mat-dialog-content>
+  <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="hijos">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Nombre Completo</th>
+        <th>Fecha Nac.</th>
+        <th>Accion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let hijo of hijos">
+        <td>{{ hijo.idDerhab}}</td>
+        <td>{{ hijo.nombreCompleto }}</td>
+        <td>{{ hijo.fchNac | date:'dd-MM-yyyy' }}</td>
+        <td>
+          <button mat-mini-fab color="warn" aria-label="Eliminar hijo">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</mat-dialog-content>

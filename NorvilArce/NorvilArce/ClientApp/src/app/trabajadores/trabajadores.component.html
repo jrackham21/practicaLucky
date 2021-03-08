@@ -1,0 +1,37 @@
+<section>
+
+  <div class="container">
+
+    <h1 id="tableLabel">Trabajadores</h1>
+    <div class="raw">
+      <input placeholder="Ingresa nombre de trabajador" />
+      <button mat-flat-button color="primary" (click)="openDialogAgregarTrabajador()">Agregar Trabajador</button>
+    </div>
+
+    <p *ngIf="!trabajadores"><em>Loading...</em></p>
+
+    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="trabajadores">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Nombre Completo</th>
+          <th>Fecha Nac.</th>
+          <th>Fecha Ingreso</th>
+          <th>Accion</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let trabajador of trabajadores">
+          <td>{{ trabajador.idPersonal }}</td>
+          <td>{{ trabajador.nombreCompleto }}</td>
+          <td>{{ trabajador.fchNac | date:'dd-MM-yyyy' }}</td>
+          <td>{{ trabajador.fchIngreso | date:'dd-MM-yyyy' }}</td>
+          <td>
+          <button mat-button color="primary" (click)="openDialogVerHijos(trabajador.idPersonal)">Ver Hijos</button>
+          <button mat-raised-button color="accent" (click)="openDialogActualizar(trabajador)">Actualizar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
