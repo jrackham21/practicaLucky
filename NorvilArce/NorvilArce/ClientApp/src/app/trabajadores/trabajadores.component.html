@@ -3,35 +3,54 @@
   <div class="container">
 
     <h1 id="tableLabel">Trabajadores</h1>
-    <div class="raw">
-      <input placeholder="Ingresa nombre de trabajador" />
+    
+      <mat-form-field>
+        <mat-label>Buscar trabajador</mat-label>
+        <input matInput (keyup)="filtrar($event)">
+      </mat-form-field>
       <button mat-flat-button color="primary" (click)="openDialogAgregarTrabajador()">Agregar Trabajador</button>
-    </div>
+    
 
     <p *ngIf="!trabajadores"><em>Loading...</em></p>
 
-    <table class='table table-striped' aria-labelledby="tableLabel" *ngIf="trabajadores">
-      <thead>
-        <tr>
-          <th>Codigo</th>
-          <th>Nombre Completo</th>
-          <th>Fecha Nac.</th>
-          <th>Fecha Ingreso</th>
-          <th>Accion</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let trabajador of trabajadores">
-          <td>{{ trabajador.idPersonal }}</td>
-          <td>{{ trabajador.nombreCompleto }}</td>
-          <td>{{ trabajador.fchNac | date:'dd-MM-yyyy' }}</td>
-          <td>{{ trabajador.fchIngreso | date:'dd-MM-yyyy' }}</td>
-          <td>
-          <button mat-button color="primary" (click)="openDialogVerHijos(trabajador.idPersonal)">Ver Hijos</button>
-          <button mat-raised-button color="accent" (click)="openDialogActualizar(trabajador)">Actualizar</button>
+    <div class="mat-elevation-z8">
+      <table mat-table [dataSource]="trabajadores" class="mat-elevation-z8">
+
+        <ng-container matColumnDef="idPersonal">
+          <th mat-header-cell *matHeaderCellDef> Código </th>
+          <td mat-cell *matCellDef="let trabajador"> {{ trabajador.idPersonal }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="nombreCompleto">
+          <th mat-header-cell *matHeaderCellDef> Nombre Completo </th>
+          <td mat-cell *matCellDef="let trabajador"> {{trabajador.nombreCompleto}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fchNac">
+          <th mat-header-cell *matHeaderCellDef> Fecha Nac. </th>
+          <td mat-cell *matCellDef="let trabajador"> {{trabajador.fchNac | date:'dd-MM-yyyy' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fchIngreso">
+          <th mat-header-cell *matHeaderCellDef> Fecha Ingreso </th>
+          <td mat-cell *matCellDef="let trabajador"> {{trabajador.fchIngreso | date:'dd-MM-yyyy' }} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="acciones">
+          <th mat-header-cell *matHeaderCellDef> Acciones </th>
+          <td mat-cell *matCellDef="let trabajador">
+            <button mat-raised-button color="accent" (click)="openDialogActualizar(trabajador)">Actualizar</button>
+            <button mat-button color="primary" (click)="openDialogVerHijos(trabajador.idPersonal)">Ver Hijos</button>
+            <button mat-mini-fab color="warn" aria-label="agregar hijo" (click)="openDialogAgregarHijo(trabajador.idPersonal)">
+              <mat-icon>plus_one</mat-icon>
+            </button>
           </td>
-        </tr>
-      </tbody>
-    </table>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="columnas"></tr>
+        <tr mat-row *matRowDef="let row; columns: columnas;"></tr>
+      </table>
+    </div>
+
   </div>
 </section>

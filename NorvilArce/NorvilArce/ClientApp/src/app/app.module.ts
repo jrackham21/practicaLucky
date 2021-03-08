@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DialogVerHijosComponent } from './dialog-ver-hijos/dialog-ver-hijos.component';
 import { DialogAgregarTrabajadorComponent } from './dialog-agregar-trabajador/dialog-agregar-trabajador.component';
 import { DialogActualizarTrabajadorComponent } from './dialog-actualizar-trabajador/dialog-actualizar-trabajador.component';
+import { DialogAgregarHijoComponent } from './dialog-agregar-hijo/dialog-agregar-hijo.component';
 
 @NgModule({
   declarations: [
@@ -30,11 +31,13 @@ import { DialogActualizarTrabajadorComponent } from './dialog-actualizar-trabaja
     TrabajadoresComponent,
     DialogVerHijosComponent,
     DialogAgregarTrabajadorComponent,
-    DialogActualizarTrabajadorComponent
+    DialogActualizarTrabajadorComponent,
+    DialogAgregarHijoComponent
   ],
   entryComponents: [DialogVerHijosComponent,
     DialogAgregarTrabajadorComponent,
-    DialogActualizarTrabajadorComponent],
+    DialogActualizarTrabajadorComponent,
+    DialogAgregarHijoComponent],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,

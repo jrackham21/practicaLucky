@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import { PersonalService } from '../Services/personalservice.service';
 
 @Component({
@@ -12,7 +12,6 @@ export class DialogAgregarTrabajadorComponent implements OnInit {
   formAgregarTrabajador: FormGroup;
 
   constructor(public dialogRef: MatDialogRef<DialogAgregarTrabajadorComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: MatDialog,
     public fb: FormBuilder,
     public personalService: PersonalService) { }
 
@@ -29,9 +28,7 @@ export class DialogAgregarTrabajadorComponent implements OnInit {
 
   agregar() {
     this.personalService.crearTrabajador(this.formAgregarTrabajador.value).subscribe(
-      res => {
-        //cerrar dialog y actualizar tabla
-        console.log("joy")
+      res => {        
         console.log(this.formAgregarTrabajador.value);
       })
   }

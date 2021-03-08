@@ -1,5 +1,5 @@
-<h2 mat-dialog-title>Nuevo Trabajador</h2>
-<form [formGroup]="formAgregarTrabajador" (ngSubmit)="agregar()">
+<h2 mat-dialog-title>Registrar Hijo</h2>
+<form [formGroup]="formAgregarHijo" (ngSubmit)="agregarHijo()">
   <mat-dialog-content>
     <mat-form-field appearance="fill">
       <mat-label>Apellido Paterno</mat-label>
@@ -22,12 +22,6 @@
       <input matInput [matDatepicker]="fchNac" formControlName="fchNac">
       <mat-datepicker-toggle matSuffix [for]="fchNac"></mat-datepicker-toggle>
       <mat-datepicker #fchNac [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
-    </mat-form-field>
-    <mat-form-field appearance="fill">
-      <mat-label>Fecha de Ingreso</mat-label>
-      <input matInput [matDatepicker]="fchIng" formControlName="fchIngreso">
-      <mat-datepicker-toggle matSuffix [for]="fchIng"></mat-datepicker-toggle>
-      <mat-datepicker #fchIng [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
     </mat-form-field>
   </mat-dialog-content>
   <mat-dialog-actions>

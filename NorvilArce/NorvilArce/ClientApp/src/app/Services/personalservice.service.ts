@@ -34,14 +34,14 @@ export class PersonalService {
   }
 
   actualizarTrabajador(trabajador): Observable<Personal> {
-    return this.http.put<Personal>(this.baseUrl + 'api/trabajadores/update' + JSON.stringify(trabajador), this.httpOptions)
+    return this.http.put<Personal>(this.baseUrl + 'api/trabajadores/update', JSON.stringify(trabajador), this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )
   }
 
   eliminarTrabajador(id) {
-    return this.http.delete<Personal>(this.baseUrl + '/api/trabajadores/delete/' + id, this.httpOptions)
+    return this.http.delete<Personal>(this.baseUrl + 'api/trabajadores/delete/' + id, this.httpOptions)
       .pipe(
         catchError(this.errorHandler)
       )

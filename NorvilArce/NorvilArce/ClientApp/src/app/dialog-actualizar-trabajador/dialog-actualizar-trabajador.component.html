@@ -1,45 +1,37 @@
-<h2 mat-dialog-title>Actualizar Trabajador</h2>
-<mat-dialog-content>
-  <ol>
-    <li>
-      <mat-form-field appearance="fill">
-        <mat-label>Apellido Paterno</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Apellido Materno</mat-label>
-        <input matInput>
-      </mat-form-field>
-    </li>
-    <li>
-      <mat-form-field appearance="fill">
-        <mat-label>Primer Nombre</mat-label>
-        <input matInput>
-      </mat-form-field>
-      <mat-form-field appearance="fill">
-        <mat-label>Segundo Nombre</mat-label>
-        <input matInput>
-      </mat-form-field>
-    </li>
-    <li>
-      <mat-form-field appearance="fill">
-        <mat-label>Fecha de Nacimiento</mat-label>
-        <input matInput [matDatepicker]="fchNac">
-        <mat-datepicker-toggle matSuffix [for]="fchNac"></mat-datepicker-toggle>
-        <mat-datepicker #fchNac [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
-      </mat-form-field>
-    </li>
-    <li>
-      <mat-form-field appearance="fill">
-        <mat-label>Fecha de Ingreso</mat-label>
-        <input matInput [matDatepicker]="fchIng">
-        <mat-datepicker-toggle matSuffix [for]="fchIng"></mat-datepicker-toggle>
-        <mat-datepicker #fchIng [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
-      </mat-form-field>
-    </li>
-  </ol>
-</mat-dialog-content>
-<mat-dialog-actions>
-  <button mat-raised-button color="accent" mat-dialog-close>Actualizar</button>
-  <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
-</mat-dialog-actions>
+<h2 mat-dialog-title>Actualizar Datos de Trabajador</h2>
+<form [formGroup]="formActualizarTrabajador" (ngSubmit)="actualizar()">
+  <mat-dialog-content>
+    <mat-form-field appearance="fill">
+      <mat-label>Apellido Paterno</mat-label>
+      <input matInput formControlName="apPaterno">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Apellido Materno</mat-label>
+      <input matInput formControlName="apMaterno">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Primer Nombre</mat-label>
+      <input matInput formControlName="nombre1">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Segundo Nombre</mat-label>
+      <input matInput formControlName="nombre2">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Nacimiento</mat-label>
+      <input matInput [matDatepicker]="fchNac" formControlName="fchNac">
+      <mat-datepicker-toggle matSuffix [for]="fchNac"></mat-datepicker-toggle>
+      <mat-datepicker #fchNac [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Fecha de Ingreso</mat-label>
+      <input matInput [matDatepicker]="fchIng" formControlName="fchIngreso">
+      <mat-datepicker-toggle matSuffix [for]="fchIng"></mat-datepicker-toggle>
+      <mat-datepicker #fchIng [calendarHeaderComponent]="exampleHeader"></mat-datepicker>
+    </mat-form-field>
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-raised-button color="primary" mat-dialog-close type="submit">Actualizar</button>
+    <button mat-raised-button color="warn" mat-dialog-close>Cerrar</button>
+  </mat-dialog-actions>
+</form>

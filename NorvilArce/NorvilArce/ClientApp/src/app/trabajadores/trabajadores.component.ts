@@ -5,6 +5,8 @@ import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog
 import { DialogVerHijosComponent } from '../dialog-ver-hijos/dialog-ver-hijos.component';
 import { DialogAgregarTrabajadorComponent } from '../dialog-agregar-trabajador/dialog-agregar-trabajador.component';
 import { DialogActualizarTrabajadorComponent } from '../dialog-actualizar-trabajador/dialog-actualizar-trabajador.component';
+import { DialogAgregarHijoComponent } from '../dialog-agregar-hijo/dialog-agregar-hijo.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-trabajadores',
@@ -12,15 +14,17 @@ import { DialogActualizarTrabajadorComponent } from '../dialog-actualizar-trabaj
   styleUrls: ['./trabajadores.component.css']
 })
 export class TrabajadoresComponent implements OnInit {
-  
+
   public trabajadores: Personal[];
-  public trabajadorActual: Personal;
-  
+  dataSource = null;
+  columnas: string[] = ['idPersonal', 'nombreCompleto', 'fchNac', 'fchIngreso', 'acciones'];
+
   constructor(public dialog: MatDialog,
     public personalService: PersonalService) {
   }
   ngOnInit(): void {
     this.listarTrabajadores();
+    this.dataSource = new MatTableDataSource(this.trabajadores);
   }
 
   listarTrabajadores(): void {
@@ -28,27 +32,14 @@ export class TrabajadoresComponent implements OnInit {
       (data: Personal[]) => {
         console.log(data);
         this.trabajadores = data;
-      })   
+      })
   }
-
-  //agregarTrabajadores(personal: Personal): Boolean {
-  //  this.http.post(this.baseUrl + 'api/trabajadores/create', personal).pipe(result => {
-  //    return result;
-  //  }, error => console.error(error));
-  //}
-
-  //actualizarTrabajadores(personal: Personal): Boolean {
-  //  this.http.put(this.baseUrl + 'api/trabajadores/update', personal).pipe(result => {
-  //    return result;
-  //  }, error => console.error(error));
-  //}
 
   eliminarTrabajador(id): void {
     this.personalService.eliminarTrabajador(id).subscribe();
   }
-    
-  
-  openDialogVerHijos(idPersonal:number) {
+
+  openDialogVerHijos(idPersonal: number) {
     const dialogRef = this.dialog.open(DialogVerHijosComponent,
       {
         data: { msj: idPersonal }
@@ -66,7 +57,6 @@ export class TrabajadoresComponent implements OnInit {
       });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
       this.listarTrabajadores();
     });
   }
@@ -78,10 +68,24 @@ export class TrabajadoresComponent implements OnInit {
       });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.listarTrabajadores();
     });
   }
 
+  openDialogAgregarHijo(id) {
+    const dialogRef = this.dialog.open(DialogAgregarHijoComponent,
+      {
+        width: '500px',
+        data: { id: id }
+      });
+
+    dialogRef.afterClosed().subscribe();
+  }
+
+  filtrar(event: Event) {
+    const filtro = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filtro.trim().toLowerCase();
+  }
 }
 
 interface Personal {

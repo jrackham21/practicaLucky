@@ -24,7 +24,14 @@ export class DialogVerHijosComponent implements OnInit {
         console.log(data);
         this.hijos = data;
       })
-    }
+  }
+
+  eliminarHijo(id) {
+    this.hijoService.eliminarHijo(id).subscribe(
+      res => {
+        this.listarHijosPorTrabajador(this.data.msj);
+      });
+  }
 }
 
 interface Hijo {
