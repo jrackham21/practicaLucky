@@ -6,7 +6,7 @@
     
       <mat-form-field>
         <mat-label>Buscar trabajador</mat-label>
-        <input matInput (keyup)="filtrar($event)">
+        <input matInput (keyup)="filtrar($event.target.value)">
       </mat-form-field>
       <button mat-flat-button color="primary" (click)="openDialogAgregarTrabajador()">Agregar Trabajador</button>
     

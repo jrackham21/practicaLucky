@@ -14,24 +14,22 @@ import { MatTableDataSource } from '@angular/material/table';
   styleUrls: ['./trabajadores.component.css']
 })
 export class TrabajadoresComponent implements OnInit {
-
-  public trabajadores: Personal[];
-  dataSource = null;
+    
   columnas: string[] = ['idPersonal', 'nombreCompleto', 'fchNac', 'fchIngreso', 'acciones'];
+  trabajadores = null;
 
   constructor(public dialog: MatDialog,
     public personalService: PersonalService) {
   }
   ngOnInit(): void {
     this.listarTrabajadores();
-    this.dataSource = new MatTableDataSource(this.trabajadores);
   }
 
   listarTrabajadores(): void {
     this.personalService.listarTrabajadores().subscribe(
       (data: Personal[]) => {
-        console.log(data);
-        this.trabajadores = data;
+        console.log(data);        
+        this.trabajadores = new MatTableDataSource(data);
       })
   }
 
@@ -82,10 +80,10 @@ export class TrabajadoresComponent implements OnInit {
     dialogRef.afterClosed().subscribe();
   }
 
-  filtrar(event: Event) {
-    const filtro = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filtro.trim().toLowerCase();
+  filtrar(filtro: string) {
+    this.trabajadores.filter = filtro.trim().toLowerCase();
   }
+
 }
 
 interface Personal {
