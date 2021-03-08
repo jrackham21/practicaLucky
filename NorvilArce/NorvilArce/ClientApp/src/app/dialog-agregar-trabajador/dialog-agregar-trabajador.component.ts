@@ -13,17 +13,26 @@ export class DialogAgregarTrabajadorComponent implements OnInit {
 
   constructor(public dialogRef: MatDialogRef<DialogAgregarTrabajadorComponent>,
     @Inject(MAT_DIALOG_DATA) public data: MatDialog,
-    
+    public fb: FormBuilder,
     public personalService: PersonalService) { }
 
     ngOnInit(): void {
-      
+      this.formAgregarTrabajador = this.fb.group({        
+        apPaterno: [''],
+        apMaterno: [''],
+        nombre1: [''],
+        nombre2: [''],        
+        fchNac: [''],
+        fchIngreso: ['']
+      })
     }
 
   agregar() {
     this.personalService.crearTrabajador(this.formAgregarTrabajador.value).subscribe(
       res => {
-        //cerrar el dialog
+        //cerrar dialog y actualizar tabla
+        console.log("joy")
+        console.log(this.formAgregarTrabajador.value);
       })
   }
 
